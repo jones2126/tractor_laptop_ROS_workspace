@@ -1,0 +1,20 @@
+<launch>
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav)/maps/farm.yaml"/>
+
+  <!--- Run AMCL -->
+  <include file="$(find nav)/launch/amcl_diff.launch" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="controller_frequency" value="3.0" />
+    <rosparam file="$(find nav)/config_mb/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find nav)/config_mb/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find nav)/config_mb/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find nav)/config_mb/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find nav)/config_mb/base_local_planner_params.yaml" command="load" />
+  </node>
+
+  <!-- Convert cmd_vel to ackermann_cmd -->
+  <include file="$(find nav)/launch/cmd_vel2ackermann.launch" />
+
+</launch>

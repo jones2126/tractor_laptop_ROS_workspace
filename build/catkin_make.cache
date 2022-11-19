@@ -1,0 +1,2 @@
+tractor_odom
+-DCATKIN_DEVEL_PREFIX=/home/tractor/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tractor/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=tractor_odom -G Unix Makefiles

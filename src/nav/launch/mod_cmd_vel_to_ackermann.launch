@@ -1,0 +1,9 @@
+<!-- If teb_local_planner "cmd_angle_instead_rotvel" is set to "True", then use this
+     to convert the (modified)cmd_vel to an ackermman_cmd msg. -->
+
+<launch>
+  <node pkg="nav" type="mod_cmd_vel_to_ackermann.py" name="mod_cmd_vel_to_ackermann" output="screen">
+    <param name="twist_cmd_topic" type="string" value="/cmd_vel" />
+    <param name="ackermann_cmd_topic" type="string" value="/ackermann_cmd" />
+  </node>
+</launch>

@@ -1,0 +1,18 @@
+<!--
+https://github.com/gkouros/ackermann-drive-teleop/blob/master/launch/ackermann_drive_joyop.launch
+-->
+
+<launch>
+  <arg name="joy_dev" default="/dev/input/js1" />
+  <arg name="max_speed" default="1.0"/>
+  <arg name="max_angle" default="0.7"/>
+
+  <!-- Launch joy_node that publishes Joy messages -->
+  <node name="joy" type="joy_node" pkg="joy">
+    <param name="dev" value="$(arg joy_dev)" />
+  </node>
+
+  <!-- Launch ackermann_drive_joyop to teleoperate robots with ackermann steering -->
+  <node name="joyop" type="joyop.py" pkg="nav" output='screen' args="$(arg max_speed) $(arg max_angle)"/>
+
+</launch>

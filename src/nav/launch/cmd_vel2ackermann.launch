@@ -1,0 +1,8 @@
+<launch>
+  <node pkg="nav" type="cmd_vel_to_ackermann_drive.py" name="cmd_vel_to_ackermann_drive" output="screen">
+    <param name="twist_cmd_topic" type="string" value="/cmd_vel" />
+    <param name="ackermann_cmd_topic" type="string" value="/ackermann_cmd" />
+    <param name="frame_id" type="string" value="odom" />
+    <param name="wheelbase" type="double" value="0.505" />
+  </node>
+</launch>
