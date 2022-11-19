@@ -1,2 +1,2 @@
-tractor_odom
--DCATKIN_DEVEL_PREFIX=/home/tractor/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tractor/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=tractor_odom -G Unix Makefiles
+beginner_tutorials:chip_imu_driver:geonav_transform:hector_gazebo/hector_gazebo:hector_gazebo/hector_gazebo_plugins:hector_gazebo/hector_gazebo_thermal_camera:hector_gazebo/hector_gazebo_worlds:hector_gazebo/hector_sensors_gazebo:my_odom_publisher:nav:nmea_navsat_driver:picar/src/ackermann_vehicle:picar/src/ackermann_vehicle_description:picar/src/ackermann_vehicle_gazebo:tractor_odom
+-DCATKIN_DEVEL_PREFIX=/home/tractor/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tractor/catkin_ws/install -G Unix Makefiles
