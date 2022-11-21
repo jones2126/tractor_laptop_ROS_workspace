@@ -9,7 +9,10 @@ from geometry_msgs.msg import Transform, Quaternion, QuaternionStamped, Pose, Po
 from sensor_msgs.msg import NavSatFix, NavSatStatus, TimeReference
 
 # Import geonav tranformation module
+import sys
+sys.path.append('/home/tractor/catkin_ws/src/geonav_transform/src/')
 import geonav_transform.geonav_conversions as gc
+from imp import reload
 reload(gc)
 
 
