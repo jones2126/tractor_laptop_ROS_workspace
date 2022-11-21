@@ -38,11 +38,16 @@ import rospy
 
 from sensor_msgs.msg import NavSatFix, NavSatStatus, TimeReference
 from geometry_msgs.msg import TwistStamped, QuaternionStamped
-from tf.transformations import quaternion_from_euler
+from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 from libnmea_navsat_driver.checksum_utils import check_nmea_checksum
 import libnmea_navsat_driver.parser
 
+# for /imu
+from sensor_msgs.msg import Imu
+
+# to publish speed
+from std_msgs.msg import Float32
 
 class RosNMEADriver(object):
     """ROS driver for NMEA GNSS devices."""
@@ -74,6 +79,8 @@ class RosNMEADriver(object):
             - ~epe_quality9 (float)
                 Value to use for default EPE quality for fix type 9. (default 3.0)
         """
+        # sub = rospy.Subscriber ('/imu/data', Imu, get_rotation)
+        self.imu_sub = rospy.Subscriber ('imu/data', Imu, self.get_rotation)
         self.fix_pub = rospy.Publisher('fix', NavSatFix, queue_size=1)
         self.vel_pub = rospy.Publisher('vel', TwistStamped, queue_size=1)
         self.heading_pub = rospy.Publisher(
@@ -82,6 +89,9 @@ class RosNMEADriver(object):
         if not self.use_GNSS_time:
             self.time_ref_pub = rospy.Publisher(
                 'time_reference', TimeReference, queue_size=1)
+
+        # added to match Matt's code and to publish speed
+        self.speed_pub = rospy.Publisher('speed', Float32, queue_size=1)
 
         self.time_ref_source = rospy.get_param('~time_ref_source', None)
         self.use_RMC = rospy.get_param('~useRMC', False)
@@ -314,6 +324,22 @@ class RosNMEADriver(object):
                 current_vel.twist.linear.y = data['speed'] * \
                     math.cos(data['true_course'])
                 self.vel_pub.publish(current_vel)
+                #
+                # adding code to publish heading from /imu topic which is being published by the Chip Robotics IMU
+                #
+                self.speed_pub.publish(data['speed'])
+                current_heading = QuaternionStamped()
+                current_heading.header.stamp = current_time
+                current_heading.header.frame_id = frame_id
+                # q = quaternion_from_euler(0, 0, data['true_course'])
+                # orientation_q = msg.orientation
+                # the values from IMU orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w
+                current_heading.quaternion.x = orientation_q.x
+                current_heading.quaternion.y = orientation_q.y
+                current_heading.quaternion.z = orientation_q.z
+                current_heading.quaternion.w = orientation_q.w
+                self.heading_pub.publish(current_heading)
+                # end of code to publish heading
         elif 'GST' in parsed_sentence:
             data = parsed_sentence['GST']
 
@@ -336,6 +362,20 @@ class RosNMEADriver(object):
                 self.heading_pub.publish(current_heading)
         else:
             return False
+
+
+    # adding to get rotation
+    def get_rotation (self, msg):
+    #def get_rotation (Imu.msg):    
+        global roll, pitch, yaw
+        global orientation_q 
+        orientation_q = msg.orientation
+        #print msg.orientation
+        orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
+        (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
+        #print(yaw)
+    # end of get rotation
+
 
     @staticmethod
     def get_frame_id():
