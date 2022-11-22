@@ -1,4 +1,21 @@
 <launch>
+    <!-- robot_description is used by nodes that publish to joint_states. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro --inorder /home/tractor/catkin_ws/src/lawn_tractor_sim/urdf/lawn_tractor.urdf.xacro"/>
+           /home/tractor/catkin_ws/src/lawn_tractor_sim
+
+
+    <!-- Read joint positions from joint_states, then publish the vehicle's
+         state to tf. -->
+    <node name="vehicle_state_publisher" pkg="robot_state_publisher"
+          type="robot_state_publisher">
+      <param name="publish_frequency" value="30.0"/>
+    </node>
+
+
+<!-- ****** Fake localization for map and gps ***** -->
+<node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0.0 0.0 0.0 0 0 0.0 map odom 100"/>
+
   <!-- A simple launch file for the nmea_serial_driver node. -->
 
   <node pkg="chip_imu_driver" type="chip_imu_driver_node" name="chip_imu_driver_node" output="screen">

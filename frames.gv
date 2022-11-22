@@ -1,0 +1,10 @@
+digraph G {
+"base_footprint" -> "base_link"[label=" Broadcaster: /vehicle_state_publisher\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"odom" -> "base_footprint"[label=" Broadcaster: /gps_odom\nAverage rate: 5.208\nBuffer length: 4.8\nMost recent transform: 1669143428.255\nOldest transform: 1669143423.455\n"];
+"base_link" -> "gps"[label=" Broadcaster: /vehicle_state_publisher\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"map" -> "odom"[label=" Broadcaster: /map_to_odom\nAverage rate: 10.181\nBuffer length: 4.911\nMost recent transform: 1669143428.309\nOldest transform: 1669143423.398\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1669143428.2737308"[ shape=plaintext ] ;
+}->"map";
+}

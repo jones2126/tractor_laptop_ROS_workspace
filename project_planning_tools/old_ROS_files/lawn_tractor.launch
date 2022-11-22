@@ -1,0 +1,44 @@
+<launch>
+<!-- ************** Robot Description *************** -->
+    <!-- robot_description is used by nodes that publish to joint_states. -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro --inorder $(find lawn_tractor_sim)/urdf/lawn_tractor.urdf.xacro"/>
+
+    <!-- Read joint positions from joint_states, then publish the vehicle's
+         state to tf. -->
+    <node name="vehicle_state_publisher" pkg="robot_state_publisher"
+          type="robot_state_publisher">
+      <param name="publish_frequency" value="30.0"/>
+    </node>
+
+<!-- ****** Move Base Flex ***** -->
+  <node pkg="mbf_costmap_nav" type="mbf_costmap_nav" respawn="false" name="move_base_flex" output="screen">
+    <param name="tf_timeout" value="1.5"/>
+    <param name="planner_max_retries" value="3"/>
+    <rosparam file="$(find lawn_tractor_navigation)/config/planners.yaml" command="load" />
+    <rosparam file="$(find lawn_tractor_navigation)/config/controllers.yaml" command="load" />
+    <rosparam file="$(find lawn_tractor_navigation)/config/recovery_behaviors.yaml" command="load" />
+    <rosparam file="$(find lawn_tractor_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find lawn_tractor_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find lawn_tractor_navigation)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find lawn_tractor_navigation)/config/local_costmap_params.yaml" command="load" />
+  	<rosparam file="$(find lawn_tractor_navigation)/config/teb_local_planner_params_carlike.yaml"
+		 command="load" />
+    <remap from="cmd_vel" to="move_base/cmd_vel" />
+  </node>
+
+  <!--The below is the old SMACH based code, leaving commented code here temporarily-->
+  <!-- <node pkg="lawn_tractor_navigation" name="mbf_state_machine" type="mbf_state_machine.py" respawn="false" output="screen"/> -->
+  <node pkg="lawn_tractor_navigation" name="mbf_behavior_tree" type="movebaseflex_bt_node" respawn="false" output="screen" />
+
+<!-- ****** Maps ***** -->
+<node name="map_server" pkg="map_server" type="map_server"
+		 args="$(find lawn_tractor_sim)/maps/farm.yaml" output="screen">
+	<param name="frame_id" value="map"/>
+
+</node>
+
+<!-- ****** Fake localization for map and gps ***** -->
+<node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0.0 0.0 0.0 0 0 0.0 map odom 100"/>
+<node pkg="tf" type="static_transform_publisher" name="map_to_utm" args="0.0 0.0 0.0 0 0 0.0 map utm 100"/>
+</launch>
