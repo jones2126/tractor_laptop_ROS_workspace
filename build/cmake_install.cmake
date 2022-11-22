@@ -131,7 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/tractor/catkin_ws/build/gtest/cmake_install.cmake")
-  include("/home/tractor/catkin_ws/build/tractor_odom/cmake_install.cmake")
+  include("/home/tractor/catkin_ws/build/chip_imu_driver/cmake_install.cmake")
 
 endif()
 

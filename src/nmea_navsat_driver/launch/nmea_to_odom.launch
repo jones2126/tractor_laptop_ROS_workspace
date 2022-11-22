@@ -1,0 +1,20 @@
+<launch>
+  <!-- A simple launch file for the nmea_serial_driver node. -->
+
+  <node pkg="chip_imu_driver" type="chip_imu_driver_node" name="chip_imu_driver_node" output="screen">
+    <param name="port" value="/dev/rosimu" />
+  </node>
+
+  <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+    <param name="port" value="/dev/ttyUSB0"/>
+    <param name="baud" value="115200" />
+    <param name="frame_id" value="gps" />
+    <param name="use_GNSS_time" value="False" />
+    <param name="time_ref_source" value="gps" />
+    <param name="useRMC" value="False" />
+  </node>
+
+    <node pkg="beginner_tutorials" name="gps_odom" type="gps_odom.py" output="screen"> 
+  </node>
+
+</launch>

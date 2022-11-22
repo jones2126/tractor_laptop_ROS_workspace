@@ -63,7 +63,7 @@ CATKIN_SKIP_TESTING:BOOL=OFF
 CATKIN_SYMLINK_INSTALL:BOOL=OFF
 
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=tractor_odom
+CATKIN_WHITELIST_PACKAGES:STRING=chip_imu_driver
 
 //Path to a file.
 CCD_INCLUDE_DIRS:PATH=/usr/include

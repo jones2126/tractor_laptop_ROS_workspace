@@ -192,8 +192,8 @@ using namespace imu_sensor;
         data_.z_acc = -convertMgToMsSquared(data_.z_acc_mg);
 
         has_new_msg_ = true;
-        ROS_INFO("Index: %i. Yaw, degree: %.2f. Pitch: %.2f. Roll: %.2f. X acc., m/s^2: %.2f. Y acc.: %.2f. Z acc.: %.2f",
-            msg_index, data_.yaw, data_.pitch, data_.roll, data_.x_acc, data_.y_acc, data_.z_acc);
+        //ROS_INFO("Index: %i. Yaw, degree: %.2f. Pitch: %.2f. Roll: %.2f. X acc., m/s^2: %.2f. Y acc.: %.2f. Z acc.: %.2f",
+        //    msg_index, data_.yaw, data_.pitch, data_.roll, data_.x_acc, data_.y_acc, data_.z_acc);
 
         /* Check if there is no any missed packages */
         uint32_t diff = msg_index - prev_msg_index;
