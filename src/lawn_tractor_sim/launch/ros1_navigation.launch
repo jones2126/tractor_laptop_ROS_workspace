@@ -1,0 +1,28 @@
+<launch>
+<!-- ************** ROS1 navigation components *************** -->
+
+
+<!-- ****** Move Base Flex ***** -->
+  <node pkg="mbf_costmap_nav" type="mbf_costmap_nav" respawn="false" name="move_base_flex" output="screen">
+    <param name="tf_timeout" value="1.5"/>
+    <param name="planner_max_retries" value="3"/>
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/planners.yaml" command="load" />
+    /home/tractor/catkin_ws/src/lawn_tractor_sim/config
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/controllers.yaml" command="load" />
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/recovery_behaviors.yaml" command="load" />
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/local_costmap_params.yaml" command="load" />
+  	<rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/teb_local_planner_params_carlike.yaml"
+		 command="load" />
+    <remap from="cmd_vel" to="move_base/cmd_vel" />
+  </node>
+
+
+	<!-- ****** Maps ***** -->
+	<node name="map_server" pkg="map_server" type="map_server"
+			 args="/home/tractor/catkin_ws/src/lawn_tractor_sim/maps/farm.yaml" output="screen">
+		<param name="frame_id" value="map"/>
+	</node>
+</launch>
