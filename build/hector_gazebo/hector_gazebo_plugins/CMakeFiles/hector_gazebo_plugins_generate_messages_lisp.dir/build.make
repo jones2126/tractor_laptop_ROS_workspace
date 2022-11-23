@@ -65,8 +65,8 @@ hector_gazebo/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_me
 
 /home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetReferenceGeoPose.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
 /home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetReferenceGeoPose.lisp: /home/tractor/catkin_ws/src/hector_gazebo/hector_gazebo_plugins/srv/SetReferenceGeoPose.srv
-/home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetReferenceGeoPose.lisp: /opt/ros/noetic/share/geographic_msgs/msg/GeoPoint.msg
 /home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetReferenceGeoPose.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
+/home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetReferenceGeoPose.lisp: /opt/ros/noetic/share/geographic_msgs/msg/GeoPoint.msg
 /home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetReferenceGeoPose.lisp: /opt/ros/noetic/share/geographic_msgs/msg/GeoPose.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tractor/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from hector_gazebo_plugins/SetReferenceGeoPose.srv"
 	cd /home/tractor/catkin_ws/build/hector_gazebo/hector_gazebo_plugins && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/tractor/catkin_ws/src/hector_gazebo/hector_gazebo_plugins/srv/SetReferenceGeoPose.srv -Igeographic_msgs:/opt/ros/noetic/share/geographic_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/noetic/share/uuid_msgs/cmake/../msg -p hector_gazebo_plugins -o /home/tractor/catkin_ws/devel/share/common-lisp/ros/hector_gazebo_plugins/srv

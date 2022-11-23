@@ -9,7 +9,7 @@
     <visual>
       <origin xyz='0.55 0 0' rpy='0 0 ${pi}' />
       <geometry>
-        <mesh filename="package://home/tractor/catkin_ws/src/lawn_tractor_sim/meshes/lawn_tractor.dae" scale='1 1 1'/>
+        <mesh filename="file:/home/tractor/catkin_ws/src/lawn_tractor_sim/meshes/lawn_tractor.dae" scale='1 1 1'/>
       </geometry>
     </visual>
   </link>

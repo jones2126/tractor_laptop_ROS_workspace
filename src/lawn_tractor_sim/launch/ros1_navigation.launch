@@ -1,7 +1,6 @@
 <launch>
 <!-- ************** ROS1 navigation components *************** -->
 
-
 <!-- ****** Move Base Flex ***** -->
   <node pkg="mbf_costmap_nav" type="mbf_costmap_nav" respawn="false" name="move_base_flex" output="screen">
     <param name="tf_timeout" value="1.5"/>
@@ -19,10 +18,13 @@
     <remap from="cmd_vel" to="move_base/cmd_vel" />
   </node>
 
-
-	<!-- ****** Maps ***** -->
+	<!-- ****** map server ***** -->
 	<node name="map_server" pkg="map_server" type="map_server"
 			 args="/home/tractor/catkin_ws/src/lawn_tractor_sim/maps/farm.yaml" output="screen">
 		<param name="frame_id" value="map"/>
 	</node>
+
+  <!-- ****** rvis ***** -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/tractor/catkin_ws/src/lawn_tractor_sim/lawn_tractor.rviz"/>
+
 </launch>
