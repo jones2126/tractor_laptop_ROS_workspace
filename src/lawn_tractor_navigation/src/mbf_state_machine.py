@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #from http://wiki.ros.org/move_base_flex/Tutorials/SimpleSmachForMoveBaseFlex
 import rospy

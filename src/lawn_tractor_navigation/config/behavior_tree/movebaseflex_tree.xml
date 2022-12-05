@@ -1,0 +1,22 @@
+<root >
+  <arg name="msg" default="At the beginning of xml." />
+  <node name="pub_text" pkg="rostopic" type="rostopic"
+     args="pub /msg std_msgs/String '$(arg msg)'"
+     output="screen" />
+  <node name="print_text" pkg="rostopic" type="rostopic"
+     args="echo /msg" output="screen" />
+     
+     <BehaviorTree>
+        <Repeat num_cycles="10">
+	    <ForceSuccess>
+            <Sequence>
+                <Timeout msec="10000">
+                    <WaitForGoal goal="{goal_pose}" />
+                </Timeout>
+                <GetPath server_name="move_base_flex/get_path" goalpose="{goal_pose}" result="{pathResultPtr}"/>
+                <ExePath server_name="move_base_flex/exe_path" pathPtr="{pathResultPtr}" />
+            </Sequence>
+            </ForceSuccess>
+        </Repeat>
+     </BehaviorTree>
+ </root>

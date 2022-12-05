@@ -138,11 +138,12 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "mbf_behaviorTree");
   ros::NodeHandle nh("~");
+  ROS_INFO("In main() of mbf_behaviorTree.cpp");
   std::string xml_file;
   std::string pkgpath = ros::package::getPath("lawn_tractor_navigation"); // TODO: make this a param
   std::string filepathprefix = pkgpath + "/config/behavior_tree/";
   nh.param<std::string>("xml_file", xml_file, "movebaseflex_tree.xml");
-
+//catkin_ws/src/lawn_tractor/lawn_tractor_navigation/config/behavior_tree/movebaseflex_tree.xml
   std::string completeFilepath = filepathprefix + xml_file;
   
   BehaviorTreeFactory factory;
@@ -151,8 +152,10 @@ int main(int argc, char **argv)
   factory.registerNodeType<GetPathActionClient>("GetPath");
   factory.registerNodeType<ExePathActionClient>("ExePath");
   factory.registerNodeType<RecoveryActionClient>("Recovery");
+  ROS_INFO("mbf_behaviorTree.cpp - before createTreeFromFile xml");
+  ROS_INFO_STREAM(completeFilepath);
   auto tree = factory.createTreeFromFile(completeFilepath);
-
+  ROS_INFO("mbf_behaviorTree.cpp - after createTreeFromFile xml");
   NodeStatus status = NodeStatus::IDLE;
 
   PublisherZMQ publisher_zmq(tree);
