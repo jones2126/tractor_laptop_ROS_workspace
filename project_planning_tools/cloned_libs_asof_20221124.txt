@@ -1,0 +1,16 @@
+  143  git clone https://github.com/ros-drivers/nmea_navsat_driver.git
+  406  git clone https://github.com/chiprobotics/chip_imu_driver.git
+  666  git clone https://github.com/bsb808/geonav_transform.git
+ 1018  git clone git@github.com:uos/mbf_tutorials.git ~/catkin_ws/src/mbf_tutorials
+ 1019  git clone git@github.com:uos/mbf_tutorials.git
+ 1020  git clone https://github.com/uos/mbf_tutorials.git
+ 1048  git clone git@github.com:utexas-bwi/eband_local_planner.git ~/catkin_ws/src/eband_local_planner
+ 1049  git clone https://github.com/utexas-bwi/eband_local_planner.git
+ 1054  git clone https://github.com/utexas-bwi/eband_local_planner.git
+ 1069  git clone https://github.com/utexas-bwi/eband_local_planner.git
+ 1073  git clone https://github.com/ethz-asl/numpy_eigen.git
+ 1077  git clone https://github.com/catkin/catkin_simple.git
+ 1081  git clone https://github.com/ethz-asl/catkin_boost_python_buildtool.git
+ 1085  git clone https://github.com/ethz-asl/eigen_catkin.git
+ 1089  git clone https://github.com/uos/mbf_tutorials.git
+ 1093  git clone https://github.com/BehaviorTree/BehaviorTree.CPP.git

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/bt3_plugin_manifest.dir/bt_plugin_manifest.cpp.o  -o /home/tractor/catkin_ws/devel/lib/behaviortree_cpp/bt3_plugin_manifest  -Wl,-rpath,/home/tractor/catkin_ws/devel/lib: /home/tractor/catkin_ws/devel/lib/libbehaviortree_cpp.so -lpthread -ldl 

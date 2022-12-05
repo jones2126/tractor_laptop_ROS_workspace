@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/t06_subtree_port_remapping.dir/t06_subtree_port_remapping.cpp.o  -o /home/tractor/catkin_ws/devel/lib/behaviortree_cpp/t06_subtree_port_remapping  -Wl,-rpath,/home/tractor/catkin_ws/devel/lib ../sample_nodes/lib/libbt_sample_nodes.a /home/tractor/catkin_ws/devel/lib/libbehaviortree_cpp.so -lpthread -ldl 

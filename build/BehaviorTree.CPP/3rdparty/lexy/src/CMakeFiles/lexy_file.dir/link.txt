@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/tractor/catkin_ws/devel/lib/liblexy_file.a  CMakeFiles/lexy_file.dir/input/file.cpp.o
+/usr/bin/ranlib /home/tractor/catkin_ws/devel/lib/liblexy_file.a

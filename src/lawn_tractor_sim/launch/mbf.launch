@@ -1,0 +1,8 @@
+<launch>
+<!-- ************** ROS1 behavior tree that Vinny wrote *************** -->
+
+<!--The below is the old SMACH based code, leaving commented code here temporarily-->
+  <!-- <node pkg="lawn_tractor_navigation" name="mbf_state_machine" type="mbf_state_machine.py" respawn="false" output="screen"/> -->
+  <node pkg="lawn_tractor_navigation" name="mbf_behavior_tree" type="movebaseflex_bt_node" respawn="false" output="screen" />
+
+</launch>

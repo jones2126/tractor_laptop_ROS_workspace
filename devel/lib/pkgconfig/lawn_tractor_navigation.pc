@@ -1,0 +1,8 @@
+prefix=/home/tractor/catkin_ws/devel
+
+Name: lawn_tractor_navigation
+Description: Description of lawn_tractor_navigation
+Version: 0.0.0
+Cflags: -I/home/tractor/catkin_ws/src/lawn_tractor_navigation/include
+Libs: -L${prefix}/lib 
+Requires: actionlib actionlib_msgs behaviortree_cpp_v3 roscpp std_msgs mbf_msgs

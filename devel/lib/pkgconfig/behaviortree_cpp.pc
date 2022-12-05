@@ -1,0 +1,8 @@
+prefix=/home/tractor/catkin_ws/devel
+
+Name: behaviortree_cpp
+Description: Description of behaviortree_cpp
+Version: 4.0.1
+Cflags: -I/home/tractor/catkin_ws/src/BehaviorTree.CPP/include
+Libs: -L${prefix}/lib -lbehaviortree_cpp
+Requires: roslib
