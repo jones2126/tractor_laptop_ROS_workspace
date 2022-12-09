@@ -16,8 +16,12 @@ from imp import reload
 reload(gc)
 
 
-_GPS_origin_lat = 40.345307365
-_GPS_origin_lon = -80.1288668917
+#_GPS_origin_lat = 40.345307365
+#_GPS_origin_lon = -80.1288668917
+
+# corner edge of concrete at 435 Pine Valley Dr as you pull up the hill
+_GPS_origin_lat = 40.345245345
+_GPS_origin_lon = -80.128990477
 
 class MainClass():
 

@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /global planner potential1/Status1
       Splitter Ratio: 0.5
     Tree Height: 407
   - Class: rviz/Selection
@@ -133,9 +134,39 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Map
       Topic: /map
+      Unreliable: false
+      Use Timestamp: false
+      Value: false
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: false
+      Name: global planner potential
+      Topic: /move_base_flex/GlobalPlanner/potential
+      Unreliable: false
+      Use Timestamp: false
+      Value: false
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: local costmap
+      Topic: /move_base_flex/local_costmap/costmap
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: global costmap
+      Topic: /move_base_flex/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -166,7 +197,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.06499990820884705
+      Angle: 0.22000020742416382
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -176,10 +207,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 4.824375629425049
+      Scale: 9.697108268737793
       Target Frame: <Fixed Frame>
-      X: 36.320072174072266
-      Y: 19.133560180664062
+      X: 21.3746337890625
+      Y: 2.9227309226989746
     Saved: ~
 Window Geometry:
   Displays:
