@@ -9,7 +9,6 @@
     <param name="tf_timeout" value="1.5"/>
     <param name="planner_max_retries" value="3"/>
     <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/planners.yaml" command="load" />
-    /home/tractor/catkin_ws/src/lawn_tractor_sim/config
     <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/controllers.yaml" command="load" />
     <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/recovery_behaviors.yaml" command="load" />
     <rosparam file="/home/tractor/catkin_ws/src/lawn_tractor_sim/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
@@ -22,8 +21,9 @@
   </node>
 
 	<!-- ****** map server ***** -->
+  <!-- (previous) args="$(find lawn_tractor_sim)/maps/farm.yaml" output="screen"> -->
 	<node name="map_server" pkg="map_server" type="map_server"
-			 args="/home/tractor/catkin_ws/src/lawn_tractor_sim/maps/farm.yaml" output="screen">
+       args="$(find lawn_tractor_sim)/maps/435_pine_valley.yaml" output="screen">
 		<param name="frame_id" value="map"/>
 	</node>
 

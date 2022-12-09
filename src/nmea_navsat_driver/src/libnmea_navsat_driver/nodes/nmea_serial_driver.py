@@ -75,8 +75,7 @@ def main():
                         "Value error, likely due to missing fields in the NMEA message. "
                         "Error was: %s. Please report this issue at "
                         "github.com/ros-drivers/nmea_navsat_driver, including a bag file with the NMEA "
-                        "sentences that caused it." %
-                        e)
+                        "sentences that caused it." % e)
 
         except (rospy.ROSInterruptException, serial.serialutil.SerialException):
             GPS.close()  # Close GPS serial port

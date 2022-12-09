@@ -67,6 +67,7 @@ all: hector_gazebo/hector_sensors_gazebo/all
 all: numpy_eigen/all
 all: BehaviorTree.CPP/all
 all: beginner_tutorials/all
+all: lawn_tractor_sim/all
 all: my_odom_publisher/all
 all: nav/all
 all: nmea_navsat_driver/all
@@ -96,6 +97,7 @@ preinstall: hector_gazebo/hector_sensors_gazebo/preinstall
 preinstall: numpy_eigen/preinstall
 preinstall: BehaviorTree.CPP/preinstall
 preinstall: beginner_tutorials/preinstall
+preinstall: lawn_tractor_sim/preinstall
 preinstall: my_odom_publisher/preinstall
 preinstall: nav/preinstall
 preinstall: nmea_navsat_driver/preinstall
@@ -130,6 +132,7 @@ clean: hector_gazebo/hector_sensors_gazebo/clean
 clean: numpy_eigen/clean
 clean: BehaviorTree.CPP/clean
 clean: beginner_tutorials/clean
+clean: lawn_tractor_sim/clean
 clean: my_odom_publisher/clean
 clean: nav/clean
 clean: nmea_navsat_driver/clean
@@ -797,6 +800,24 @@ lawn_tractor_navigation/clean: lawn_tractor_navigation/CMakeFiles/mbf_msgs_gener
 lawn_tractor_navigation/clean: lawn_tractor_navigation/CMakeFiles/mbf_msgs_generate_messages_cpp.dir/clean
 
 .PHONY : lawn_tractor_navigation/clean
+
+#=============================================================================
+# Directory level rules for directory lawn_tractor_sim
+
+# Recursive "all" directory target.
+lawn_tractor_sim/all:
+
+.PHONY : lawn_tractor_sim/all
+
+# Recursive "preinstall" directory target.
+lawn_tractor_sim/preinstall:
+
+.PHONY : lawn_tractor_sim/preinstall
+
+# Recursive "clean" directory target.
+lawn_tractor_sim/clean:
+
+.PHONY : lawn_tractor_sim/clean
 
 #=============================================================================
 # Directory level rules for directory my_odom_publisher

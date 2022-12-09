@@ -170,7 +170,7 @@ class RosNMEADriver(object):
         Returns:
             bool: True if the NMEA string is successfully processed, False if there is an error.
         """
-        # rospy.loginfo("nmea_string: %s", nmea_string) 
+        # rospy.loginfo("nmea_string: %s", nmea_string)   # for debugging as needed
         if not check_nmea_checksum(nmea_string):
             rospy.logwarn("Received a sentence with an invalid checksum. " +
                           "Sentence was: %s" % repr(nmea_string))
