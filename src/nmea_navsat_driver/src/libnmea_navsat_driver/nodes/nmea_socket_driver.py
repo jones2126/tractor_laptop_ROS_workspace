@@ -46,7 +46,7 @@ import rospy
 
 from libnmea_navsat_driver.driver import RosNMEADriver
 
-
+rospy.loginfo("debug - In nmea_socket_driver.py")
 class NMEAMessageHandler(socketserver.DatagramRequestHandler):
     def handle(self):
         for line in self.rfile:

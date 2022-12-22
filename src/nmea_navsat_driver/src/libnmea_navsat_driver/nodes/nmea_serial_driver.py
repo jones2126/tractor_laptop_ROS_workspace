@@ -39,8 +39,8 @@ import rospy
 
 from libnmea_navsat_driver.driver import RosNMEADriver
 
-
 def main():
+    rospy.loginfo("debug - In nmea_serial_driver.py")
     """Create and run the nmea_serial_driver ROS node.
 
     Creates a ROS NMEA Driver and feeds it NMEA sentence strings from a serial device.

@@ -41,6 +41,7 @@ from libnmea_navsat_driver.driver import RosNMEADriver
 
 
 def main():
+    rospy.loginfo("debug - In nmea_topic_serial_reader.py")
     """Create and run the nmea_topic_serial_reader ROS node.
 
     Opens a serial device and publishes data from the device as nmea_msgs.msg.Sentence messages.

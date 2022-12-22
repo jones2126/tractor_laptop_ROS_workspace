@@ -166,8 +166,6 @@ TwoWire I2Cone = TwoWire(1);
 Adafruit_BME280 bme;
 CRGB leds[NUM_LEDS];
 
-
-
 // int sensor_value = -99;
 void setup(){
   pinMode(led, OUTPUT);
@@ -259,9 +257,15 @@ void getControlReadings(){
     //RadioControlData.throttle_val = ThrottleValues[return_test];
     RadioControlData.throttle_val = throttle_val;
     steering_val = analogRead(POT_Y);
-    return_test = classifyRange(SteeeringPts, steering_val); 
-    RadioControlData.steering_val = SteeeringValues[return_test];
-    //RadioControlData.steering_val = steering_val_ROS; 
+    // this mapping seems unbalanced because the potentiometer is in the middle around 700 (i.e. drive straight)  
+    if (steering_val < 550) {
+        RadioControlData.steering_val = map(steering_val, 0, 550, -45, 0);
+        }
+        else if (steering_val > 1000) {
+            RadioControlData.steering_val = map(steering_val, 1000, 4095, 0, 45);
+            }
+            else RadioControlData.steering_val = 0;
+  
     voltage_val = analogRead(voltage_pin);
     RadioControlData.estop = digitalRead(ESTOP_PIN);  //LOW = 0 side; HIGH = middle
 }

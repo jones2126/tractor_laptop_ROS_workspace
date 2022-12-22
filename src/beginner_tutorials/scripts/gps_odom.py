@@ -22,7 +22,9 @@ reload(gc)
 # corner edge of concrete at 435 Pine Valley Dr as you pull up the hill
 _GPS_origin_lat = 40.345245345
 _GPS_origin_lon = -80.128990477
-
+# garage:  40.345309421806114, -80.12893254116138
+# block 1: 40.34528795703812, -80.12892449453484
+# block 2: 40.34526547013098, -80.1289177890127
 class MainClass():
 
     def __init__(self):
@@ -83,7 +85,8 @@ class MainClass():
         # Publish Transform between odom and base_link
         odom_broadcaster = tf.TransformBroadcaster()
         #odom_broadcaster.sendTransform((_xg, _yg, 0.0), self.odom_quat, rospy.Time.now(), "base_link", "odom")
-        odom_broadcaster.sendTransform((_xg, _yg, 0.0), self.odom_quat, rospy.Time.now(), "base_footprint", "odom")      
+        if data.status.status == 2:
+            odom_broadcaster.sendTransform((_xg, _yg, 0.0), self.odom_quat, rospy.Time.now(), "base_footprint", "odom")      
         
     def publish_node(self):
         rate = rospy.Rate(10)

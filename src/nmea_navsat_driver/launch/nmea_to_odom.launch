@@ -28,7 +28,7 @@
   </node>
 
   <!-- Launch the gps_odom.py script - check this I think you are doing this in a rosrun statement also. -->
-  <node pkg="beginner_tutorials" name="gps_odom" type="gps_odom.py" output="screen"> 
+  <node pkg="lawn_tractor_navigation" name="gps_odom" type="gps_odom2.py" output="screen"> 
   </node>
 
 </launch>

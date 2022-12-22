@@ -37,10 +37,10 @@ import datetime
 import calendar
 import math
 import logging
-
+import rospy
 
 logger = logging.getLogger('rosout')
-
+rospy.loginfo("debug - In libnmea_navsat_driver/parser.py")
 
 field_delimiter_regex = re.compile(r'[,*]')
 

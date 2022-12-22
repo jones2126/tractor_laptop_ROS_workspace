@@ -35,7 +35,7 @@
 import math
 
 import rospy
-
+rospy.loginfo("debug - In libnmea_navsat_driver/driver.py")
 from sensor_msgs.msg import NavSatFix, NavSatStatus, TimeReference
 from geometry_msgs.msg import TwistStamped, QuaternionStamped
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
@@ -79,6 +79,7 @@ class RosNMEADriver(object):
             - ~epe_quality9 (float)
                 Value to use for default EPE quality for fix type 9. (default 3.0)
         """
+        rospy.loginfo("debug - In libnmea_navsat_driver/driver.py")
         # sub = rospy.Subscriber ('/imu/data', Imu, get_rotation)
         self.imu_sub = rospy.Subscriber ('imu/data', Imu, self.get_rotation)
         self.fix_pub = rospy.Publisher('fix', NavSatFix, queue_size=1)

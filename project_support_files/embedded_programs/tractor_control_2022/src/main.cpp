@@ -9,15 +9,13 @@ this board should trigger a relay to stops the motor on the this tractor.
 You will see below this program uses the RadioLib SX127x (i.e. jgromes/RadioLib@^5.3.0) library to manage the LoRa communications
 ref: https://github.com/jgromes/RadioLib/wiki/Default-configuration#sx127xrfm9x---lora-modem  or https://jgromes.github.io/RadioLib/
 
-10/8/22 - 
-- Test receiving throttle and steering settings
-- Test receiving the e-stop notification
-- Test getting heading and speed from ROS and transmitting to the radio control device
+
 */
 
 // include the library
 #include <RadioLib.h>
 #include <ESP32Servo.h>
+#include <Adafruit_SSD1306.h>
 
 
 // functions below loop() - required to tell VSCode compiler to look for them below.  Not required when using Arduino IDE
@@ -33,6 +31,8 @@ void throttleVehicle();
 float mapfloat(float x, float in_min, float in_max, float out_min, float out_max);
 void eStopRoutine();
 void transmissionServoSetup();
+void startOLED();
+void displayOLED();
 
 // radio related
 float FREQUENCY = 915.0;  // MHz - EU 433.5; US 915.0
@@ -132,6 +132,22 @@ unsigned long test_start_time = 0;
 float test_duration = 0;
 ///////////////////////////////////////////////////////////
 
+/////////////////////OLED variables///////////////////////
+//OLED definitions
+#define OLED_SDA 4
+#define OLED_SCL 15 
+#define OLED_RST 16
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
+const int row_1 = 17;
+const int row_2 = 27;
+const int row_3 = 37;
+const int row_4 = 47;
+const int row_5 = 57;
+unsigned long prev_time_OLED = 0;
+const long OLEDInterval = 500;
+///////////////////////////////////////////////////////////
   // setup servo for throttle
   //Using “myservo.write(val);”  - 60=reverse; 73=neutral; 92=first
 Servo transmissionServo;  // create servo object to control a servo 
@@ -152,7 +168,9 @@ void setup() {
   pinMode(estopRelay_pin, OUTPUT);
   transmissionServoSetup();
   startSerial();
+  startOLED();
   InitLoRa();
+
 }
 void transmissionServoSetup(){
   pinMode(transmissionPowerPin, OUTPUT);
@@ -170,7 +188,8 @@ void loop() {
     if ((currentMillis - prev_time_throttle)   >= throttleInterval)  {throttleVehicle();}    
     if ((currentMillis - prev_time_reading)    >= readingInterval)   {getTractorData();}
     if ((currentMillis - prev_time_xmit)       >= transmitInterval)  {sendOutgoingMsg();}
-    if ((currentMillis - prev_time_printinfo)  >= infoInterval)      {print_Info_messages();}       
+    if ((currentMillis - prev_time_printinfo)  >= infoInterval)      {print_Info_messages();} 
+    if ((currentMillis - prev_time_OLED)        >= OLEDInterval)      {displayOLED();}          
 }
 void startSerial(){
   Serial.begin(115200);
@@ -364,7 +383,7 @@ void steerVehicle(){
 void throttleVehicle(){
     //tranmissioPotValue = analogRead(potpin);  // change to   get the data from the LoRo packet
     //transmissionServoValue = map(potval, 0, max_pot_value, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
-    transmissionServoValue = map(RadioControlData.throttle_val, 0, 4095, 50, 100);    // - 60=reverse; 73=neutral; 92=first
+    transmissionServoValue = map(RadioControlData.throttle_val, 0, 4095, 50, 110);    // - 60=reverse; 73=neutral; 92=first
     digitalWrite(transmissionPowerPin, LOW);   // turn power on to transmission servo
     //transmissionServoValue = transmissionNeutralPos;  // neutral
     transmissionServo.write(transmissionServoValue);                  // sets the servo position according to the scaled value
@@ -392,4 +411,40 @@ void eStopRoutine(){
     transmissionServo.write(transmissionNeutralPos);
     delay(500);
     digitalWrite(transmissionPowerPin, HIGH);   // turn power on to transmission servo
+}
+void startOLED(){
+  Serial.println("In startOLED");
+  pinMode(OLED_RST, OUTPUT);
+  digitalWrite(OLED_RST, LOW);
+  delay(20);
+  digitalWrite(OLED_RST, HIGH);
+  Wire.begin(OLED_SDA, OLED_SCL);  
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3c, false, false)) { // Address 0x3C for 128x32
+    Serial.println(F("SSD1306 allocation failed"));
+    while(1) delay(1000);   // loop forever and don't continue
+  }
+  display.clearDisplay();
+  display.setTextColor(WHITE);
+  display.setTextSize(1);
+  display.setCursor(0,0);
+  display.print("start OLED");
+  Serial.println("startOLED - exit");   
+}
+void displayOLED(){
+  display.clearDisplay();
+  display.setCursor(0,0);
+  display.setTextSize(1);
+  display.print("Control Readings");
+  //display.setCursor(0,17);  display.print("RC Volt:");  display.setCursor(58,17); display.print(voltage_val);  
+  //display.setCursor(0,27);  display.print("RSSI:");     display.setCursor(58,27); display.print(radio.getRSSI());
+  display.setCursor(0,row_1);  display.print("RSSI:");     display.setCursor(58,row_1); display.print(radio.getRSSI());
+  display.setCursor(0,row_2);  display.print("Throttle:"); display.setCursor(58,row_2); display.print(transmissionServoValue);
+  display.setCursor(0,row_3);  display.print("Steering:"); display.setCursor(58,row_3); display.print(abs(steer_effort));
+  display.setCursor(0,row_4);  display.print("P"); display.setCursor(10,row_4); display.print(kp,2);
+  display.setCursor(50,row_4);  display.print("I"); display.setCursor(60,row_4); display.print(ki,5);
+  display.setCursor(0,row_5);  display.print("D"); display.setCursor(10,row_5); display.print(kd,2);  
+  //display.setCursor(0,57);  display.print("Mode SW:");  display.setCursor(58,57); display.print(switch_mode);
+  //display.setCursor(0,57);  display.print("T cntr:");  display.setCursor(58,57); display.print(TractorData.counter);   
+  display.display();
+  //  Serial.print(", TractorData.counter: "); Serial.print(TractorData.counter);
 }
