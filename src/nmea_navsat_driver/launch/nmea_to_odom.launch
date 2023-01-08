@@ -19,7 +19,7 @@
 
   <!-- Launch the nmea_serial_driver node. -->
   <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
-    <param name="port" value="/dev/ttyUSB0"/>
+    <param name="port" value="/dev/gps"/>
     <param name="baud" value="115200" />
     <param name="frame_id" value="gps" />
     <param name="use_GNSS_time" value="False" />
@@ -28,7 +28,7 @@
   </node>
 
   <!-- Launch the gps_odom.py script - check this I think you are doing this in a rosrun statement also. -->
-  <node pkg="lawn_tractor_navigation" name="gps_odom" type="gps_odom2.py" output="screen"> 
+  <node pkg="beginner_tutorials" name="gps_odom" type="gps_odom.py" output="screen"> 
   </node>
 
 </launch>

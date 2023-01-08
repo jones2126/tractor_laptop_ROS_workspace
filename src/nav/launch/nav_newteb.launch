@@ -16,7 +16,8 @@
 
         
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav)/maps/farm.yaml"/>
+  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find nav)/maps/farm.yaml"/>  -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav)/maps/435_pine_valley.yaml"/>
 
   <!--- Run AMCL -->
   <!--- <include file="$(find nav)/launch/amcl_diff.launch" /> -->

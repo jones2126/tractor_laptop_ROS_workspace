@@ -114,6 +114,7 @@ class RosNMEADriver(object):
         """Format for this dictionary is the fix type from a GGA message as the key, with
         each entry containing a tuple consisting of a default estimated
         position error, a NavSatStatus value, and a NavSatFix covariance value."""
+        rospy.loginfo("debug - In libnmea_navsat_driver/driver.py - gps-qualities")
         self.gps_qualities = {
             # Unknown
             -1: [
@@ -158,6 +159,7 @@ class RosNMEADriver(object):
                 NavSatFix.COVARIANCE_TYPE_APPROXIMATED
             ]
         }
+        rospy.loginfo("debug - In libnmea_navsat_driver/driver.py - after-qualities")
 
     def add_sentence(self, nmea_string, frame_id, timestamp=None):
         """Public method to provide a new NMEA sentence to the driver.
@@ -171,7 +173,7 @@ class RosNMEADriver(object):
         Returns:
             bool: True if the NMEA string is successfully processed, False if there is an error.
         """
-        # rospy.loginfo("nmea_string: %s", nmea_string)   # for debugging as needed
+        rospy.loginfo("nmea_string: %s", nmea_string)   # for debugging as needed
         if not check_nmea_checksum(nmea_string):
             rospy.logwarn("Received a sentence with an invalid checksum. " +
                           "Sentence was: %s" % repr(nmea_string))
